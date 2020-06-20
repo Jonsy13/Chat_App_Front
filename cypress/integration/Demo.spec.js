@@ -18,8 +18,8 @@ describe("Testing login page components visibility",()=>{
         cy.get(".heading").should("be.visible");
     })
 
-    it("Testing the visibility of Username Input",async ()=>{
-        await cy.get(':nth-child(2) > .joinInput').should('be.visible');
+    it("Testing the visibility of Username Input",()=>{
+        cy.get(':nth-child(2) > .joinInput').should('be.visible');
     })
 
     it("Testing the visibilty of Room input",()=>{
