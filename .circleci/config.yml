@@ -10,8 +10,21 @@ jobs:
       - node/with-cache:
           steps:
             - run: npm install
-            - run: npm test
+            - start: npm start
+  Cypress:
+    executor:
+      name: Cypress
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - start: npx cypress open
+
 workflows:
     build-and-test:
       jobs:
         - build-and-test
+        - Cypress
+          require
+            - build-and-test
