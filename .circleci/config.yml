@@ -10,3 +10,4 @@ workflows:
           requires:
             - cypress/install
           start: 'npm start'  # start server before running tests
+      - run: $(npm bin)/cypress run
