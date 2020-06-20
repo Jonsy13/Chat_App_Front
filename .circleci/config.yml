@@ -5,8 +5,11 @@ workflows:
   build:
     jobs:
       - cypress/install:
-          command: 'npm ci'  # run a custom app build step
+      - run:
+          name: installing dev dependencies...
+          command: npm ci
       - cypress/run:
           requires:
             - cypress/install
+            - run
           start: 'npm start & wait-on http://localhost:3000'  # start server before running tests
