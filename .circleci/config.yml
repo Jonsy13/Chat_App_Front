@@ -15,6 +15,12 @@ jobs:
             - v1-deps-{{ .Branch }}
             - v1-deps
       - run:
+          name: Install All Dependencies
+          command: npm i
+      - run:
+          name: Starting Frontend
+          command: npm start
+      - run:
           name: Install Dependencies
           command: npm ci
       - save_cache:
