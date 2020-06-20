@@ -72,34 +72,34 @@ describe("Testing the E2E for login and Messaging",()=>{
 })
 
 
-describe("Testing using Stubs",()=>{
-    it("Non Server Route",()=>{
-        cy.visit('/');
-        cy.server();
-        cy.route('POST','/ppts',{
-            name: 'Jonsy',
-            age: 22
-        })
+// describe("Testing using Stubs",()=>{
+//     it("Non Server Route",()=>{
+//         cy.visit('/');
+//         cy.server();
+//         cy.route('POST','/ppts',{
+//             name: 'Jonsy',
+//             age: 22
+//         })
 
        
        
 
      
-    })
-})
+//     })
+// })
 
 
-describe("Testing using Route()",()=>{
-    it("404 Route testing",()=>{
-        cy.visit('/');
-        cy.server();
-        cy.route({
-            url:'/ppts',
-            method:'POST',
-            status: 500,
-            response: {}
-        })
+// describe("Testing using Route()",()=>{
+//     it("404 Route testing",()=>{
+//         cy.visit('/');
+//         cy.server();
+//         cy.route({
+//             url:'/ppts',
+//             method:'POST',
+//             status: 500,
+//             response: {}
+//         })
         
         
-    })
-})
+//     })
+// })
