@@ -10,4 +10,5 @@ workflows:
           requires:
             - cypress/install
           start: 'npm start'  # start server before running test
-      - store_test_results
+      - store_test_results:
+          path: test-results
