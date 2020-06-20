@@ -9,4 +9,4 @@ workflows:
       - cypress/run:
           requires:
             - cypress/install
-          start: 'npm start'  # start server before running tests
+          start: 'npm start & wait-on http://localhost:3000'  # start server before running tests
