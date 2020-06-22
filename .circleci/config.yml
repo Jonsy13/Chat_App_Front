@@ -11,3 +11,4 @@ workflows:
             - cypress/install
           record: true        # record results on Cypress Dashboard
           start: 'npm start'  # start server before running tests
+          background: true
