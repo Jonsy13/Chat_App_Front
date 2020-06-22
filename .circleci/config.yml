@@ -13,7 +13,7 @@ workflows:
           record: true        # record results on Cypress Dashboard
           start: 'npm start'  # start server before running tests
           store_artifacts: true
-          wait-on: 'http-get://localhost:3000'
+          wait-on: 'http://localhost:3000'
           post-steps:
            - store_test_results:
                path: cypress/results
