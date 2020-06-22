@@ -12,8 +12,8 @@ jobs:
             - run: npm install
             - run: npm start
             - run:
-              name: Running E2E tests
-              command: cypress run
+                name: Running E2E tests
+                command: cypress run
 workflows:
     build-and-test:
       jobs:
