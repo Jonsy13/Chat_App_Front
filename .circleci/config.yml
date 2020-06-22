@@ -30,6 +30,9 @@ jobs:
         - ~/.npm
         - ~/.cache
     - run:
+        name: build
+        command: npm run build
+    - run:
         name: Start
         command: npm start
         background: true
