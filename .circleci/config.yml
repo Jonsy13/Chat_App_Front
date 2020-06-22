@@ -1,49 +1,11 @@
-# Orb 'cypress-io/cypress@1' resolved to 'cypress-io/cypress@1.7.0'
-version: 2
-jobs:
-  cypress/run:
-    docker:
-    - image: cypress/base:10
-    parallelism: 4
-    steps:
-    - checkout
-    - restore_cache:
-        keys:
-        - cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
-    - run:
-        name: Check if package-lock.json exists
-        command: |
-          if [ ! -e ./package-lock.json ]; then
-            echo "The Cypress orb uses 'npm ci' to install 'node_modules', which requires a 'package-lock.json'."
-            echo "A 'package-lock.json' file was not found. Please run 'npm install' in your project,"
-            echo "and commit 'package-lock.json' to your repo."
-            exit 1
-          fi
-    - run:
-        name: Npm CI
-        command: npm ci
-    - run:
-        command: npx cypress verify
-    - save_cache:
-        key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
-        paths:
-        - ~/.npm
-        - ~/.cache
-    - run:
-        name: build
-        command: npm run build
-    - run:
-        name: Start
-        command: npm start
-        background: true
-    - run:
-        name: Wait-on http://localhost:3000
-        command: npx wait-on http-get://localhost:3000
-    - run:
-        name: Run Cypress tests
-        command: "npx cypress run \\\n   \\\n   \\\n  "
+Original config.yml file:
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1.24.0
 workflows:
   build:
     jobs:
-    - cypress/run
-  version: 2
+      - cypress/run:
+          start: npm start
+          wait-on: 'http-get://localhost:3000'
+          no-workspace: true
