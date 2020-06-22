@@ -34,6 +34,9 @@ jobs:
         command: npm start
         background: true
     - run:
+        name: Wait-on http://localhost:3000
+        command: npx wait-on http-get://localhost:3000
+    - run:
         name: Run Cypress tests
         command: "npx cypress run \\\n   \\\n   \\\n  "
 workflows:
