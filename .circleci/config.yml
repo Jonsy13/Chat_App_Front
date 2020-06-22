@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   cypress: cypress-io/cypress@1
-  node: circleci/node@1.1.6
 workflows:
   build:
     jobs:
@@ -11,6 +10,7 @@ workflows:
           requires:
             - cypress/install
           record: true        # record results on Cypress Dashboard
-      - run: 
-          command: 'npm start'  # start server before running tests
-          background: true
+          start: 
+            name: 'Start'
+            command: npm start  # start server before running tests
+            background: true
