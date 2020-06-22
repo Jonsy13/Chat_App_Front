@@ -19,9 +19,10 @@
     "wait-on": "^5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start -p 3000",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "cy:run": "cypress run",
+    "test": "start-server-and-test start http://localhost:3000 cy:run",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -38,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "start-server-and-test": "^1.11.0"
   }
 }
