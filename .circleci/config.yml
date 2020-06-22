@@ -27,4 +27,5 @@ jobs:
           name: Starting The Server
           command: npm start
           background: true
+          wait-on: 'http-get://localhost:3000'
       - run: $(npm bin)/cypress run
