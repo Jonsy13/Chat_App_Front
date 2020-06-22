@@ -13,3 +13,6 @@ workflows:
           start: 'npm start'  # start server before running tests
           store_artifacts: true
           wait-on: 'http-get://localhost:3000'
+      - store_test_results:
+          path: test-results
+
