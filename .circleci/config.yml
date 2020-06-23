@@ -26,9 +26,10 @@ jobs:
       - run:
           command: npm run start:ci
           background: true
+      - run:
+          wait-on: 'http://localhost:3000'
       - run: 
           command: npm run e2e:record
-          wait-on: 'http://localhost:3000'
 
 workflows:
   version: 2
