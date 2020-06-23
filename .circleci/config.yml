@@ -25,6 +25,7 @@ jobs:
       # start server before starting tests
       - run:
           command: npm run start:ci
+          wait-on: http-get://localhost:3000
           background: true
       - run: npm run e2e:record
 
