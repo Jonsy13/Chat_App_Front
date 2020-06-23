@@ -24,9 +24,11 @@ jobs:
             - ~/.cache
       # start server before starting tests
       - run:
-          command: npm run start:ci & wait-on http://localhost:3000
+          command: npm run start:ci
           background: true
-      - run: npm run e2e:record
+      - run: 
+          command: npm run e2e:record
+          wait-on: 'http://localhost:3000'
 
 workflows:
   version: 2
