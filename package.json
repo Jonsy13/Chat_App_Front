@@ -23,7 +23,7 @@
     "build": "react-scripts build",
     "cy:run": "cypress run",
     "test": "cy:run",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
     "e2e": "cypress run",
     "e2e:chrome": "cypress run --browser chrome",
     "e2e:record": "cypress run --record",
