@@ -18,7 +18,7 @@
     "wait-on": "^5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
     "cy:run": "cypress run",
     "test": "start-server-and-test start http://localhost:3000 cy:run",
@@ -40,6 +40,8 @@
     ]
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.8.1",
+    "@cypress/instrument-cra": "^1.1.1",
     "cypress": "^4.9.0",
     "start-server-and-test": "^1.11.0"
   }
