@@ -19,7 +19,7 @@
     "wait-on": "^5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
     "start-server": "yarn start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
