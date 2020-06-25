@@ -13,6 +13,6 @@ jobs:
       
       - run: npm install
 
-      - run: npm ci:cypress-run
+      - run: npx ci:cypress-run
 
       - run: npm build
