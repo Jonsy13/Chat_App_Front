@@ -16,3 +16,4 @@ jobs:
       - run: npx cypress-run
 
       - run: npm build
+
