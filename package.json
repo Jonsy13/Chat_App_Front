@@ -20,11 +20,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-server": "yarn start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "cypress:run": "cypress run --record --key=${CYPRESS_RECORD_KEY}",
-    "ci:cypress-run": "start-server-and-test 'yarn start-server' http://localhost:3000 cypress:run"
+    "ci:cypress-run": "start-server-and-test 'npm start' http://localhost:3000 cypress:run"
   },
   "eslintConfig": {
     "extends": "react-app"
