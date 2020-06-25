@@ -16,7 +16,7 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-      - run: yarn install
+      - run: npm install
 
       - save_cache:
           paths:
@@ -25,6 +25,6 @@ jobs:
             - ~/.cache
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: yarn ci:cypress-run
+      - run: npm ci:cypress-run
 
-      - run: yarn build
+      - run: npm build
