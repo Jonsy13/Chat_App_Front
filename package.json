@@ -20,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "cy:run": "cypress run --record --key=200ef921-0f21-4ff4-8f13-687b632a123e",
+    "cy:run": "cypress run --record --key=$(Record_Key)",
     "test": "start-server-and-test start http://localhost:3000 cy:run",
     "eject": "react-scripts eject"
   },
