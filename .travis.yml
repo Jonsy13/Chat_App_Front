@@ -15,5 +15,7 @@ cache:
     - ~/.cache
 install:
   - npm ci
+build:
+  - npm run build
 script:
   - $(npm bin)/cypress run
