@@ -18,4 +18,4 @@ install:
 
 script:
   - npm start
-  - $(npm bin)/cypress run
+  - npm test
