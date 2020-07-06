@@ -73,7 +73,9 @@ jobs:
           body: |  
             **Test Result:** All tests are passed
             **Run ID:** [${{ env.RUN_ID }}](https://github.com/Jonsy13/Chat_App_Front/actions/runs/${{ env.RUN_ID }})
-          reactions: hooray         
+          reactions: hooray
+        env: 
+          RUN_ID: ${{ github.run_id }}           
 
       - name: Check for any job failed
         if: ${{ failure() }}
@@ -84,3 +86,5 @@ jobs:
             **Test Failed:** Some tests are failed please check
             **Run ID:** [${{ env.RUN_ID }}](https://github.com/Jonsy13/Chat_App_Front/actions/runs/${{ env.RUN_ID }})
           reactions: confused
+        env: 
+          RUN_ID: ${{ github.run_id }}
