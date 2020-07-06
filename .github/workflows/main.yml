@@ -1,39 +1,70 @@
-name: With server
-on: 
+name: E2E Testing
+
+on:
   issue_comment:
     types: [created]
+
 jobs:
-  cypress-run:
-    if: contains(github.event.comment.html_url, '/pull/') && startsWith(github.event.comment.body, '/run-e2e')
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Notification for e2e Start
-        uses: peter-evans/create-or-update-comment@v1
-        with:
-          comment-id: "${{ github.event.comment.id }}"
-          body: |
-            ****
-            **Test Status:** The e2e test has been started please wait for the results ...      
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Cypress run
+  tests: 
+  if: contains(github.event.comment.html_url,'/pull/') && startsWith(github.event.comment.body,'/run-e2e')
+  runs-on: ubuntu-latest
+  steps:
+
+    - name: Notification for e2e Start
+      uses: peter-evans/create-or-update-comment@v1
+      with:
+        comment-id: "${{github.event.comment.id}}"
+        body: |
+          ****
+          **Test Status: ** The E2E test has been started please wait for the results ...
+    
+  #Using the last commit id of pull request
+    - uses: octokit/request-action@v2.x
+      id: get_PR_commits
+      with:
+        route: GET /repos/:repo/pulls/:pull_number/commits
+        repo: ${{ github.repository }}
+        pull_number: ${{ github.event.issue.number }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: set commit to output
+      id: getcommit
+      run: | 
+        prsha=$(echo $response | jq '.[-1].sha'  | tr -d '"')
+        echo "::set-output name=sha::$prsha" 
+      env: 
+        response:  ${{ steps.get_PR_commits.outputs.data }}
+        
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{steps.getcommit.outputs.sha}} 
+      
+    - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
           start: npm start
-      - name: Check for all the jobs are succeeded
-        if: ${{ success() && env.TEST_RUN == 'true' }}
-        uses: peter-evans/create-or-update-comment@v1
-        with:
-          comment-id: "${{ github.event.comment.id }}"
-          body: |  
-            **Test Result:** All tests are passed
-          reactions: hooray         
+    
+    - name: Check the test run
+        if: |
+         startsWith(github.event.comment.body,'/run-e2e')
+        run: |
+          echo ::set-env name=TEST_RUN::true
+          
+    - name: Check for all the jobs are succeeded
+      if: ${{ success() && env.TEST_RUN == 'true' }}
+      uses: peter-evans/create-or-update-comment@v1
+      with:
+        comment-id: "${{ github.event.comment.id }}"
+        body: |  
+          **Test Result:** All tests are passed
+        reactions: hooray         
 
-      - name: Check for any job failed
-        if: ${{ failure() }}
-        uses: peter-evans/create-or-update-comment@v1
-        with:
-          comment-id: "${{ github.event.comment.id }}"
-          body: |
-            **Test Failed:** Some tests are failed please check
-          reactions: confused
+    - name: Check for any job failed
+      if: ${{ failure() }}
+      uses: peter-evans/create-or-update-comment@v1
+      with:
+        comment-id: "${{ github.event.comment.id }}"
+        body: |
+          **Test Failed:** Some tests are failed please check
+        reactions: confused
