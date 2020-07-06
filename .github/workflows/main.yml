@@ -41,15 +41,15 @@ jobs:
         ref: ${{steps.getcommit.outputs.sha}} 
       
     - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          start: npm start
+      uses: cypress-io/github-action@v2
+      with:
+        start: npm start
     
     - name: Check the test run
-        if: |
-         startsWith(github.event.comment.body,'/run-e2e')
-        run: |
-          echo ::set-env name=TEST_RUN::true
+      if: |
+        startsWith(github.event.comment.body,'/run-e2e')
+      run: |
+        echo ::set-env name=TEST_RUN::true
           
     - name: Check for all the jobs are succeeded
       if: ${{ success() && env.TEST_RUN == 'true' }}
