@@ -47,7 +47,7 @@ jobs:
         id: cypress
         # Continue the build in case of an error, as we need to set the
         # commit status in the next step, both in case of success and failure
-        continue-on-error: true
+        continue-on-error: false
         with:
           record: true  
           start: npm start 
