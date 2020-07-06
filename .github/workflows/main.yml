@@ -20,3 +20,20 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: npm start
+      - name: Check for all the jobs are succeeded
+        if: ${{ success() && env.TEST_RUN == 'true' }}
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          comment-id: "${{ github.event.comment.id }}"
+          body: |  
+            **Test Result:** All tests are passed
+          reactions: hooray         
+
+      - name: Check for any job failed
+        if: ${{ failure() }}
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          comment-id: "${{ github.event.comment.id }}"
+          body: |
+            **Test Failed:** Some tests are failed please check
+          reactions: confused
