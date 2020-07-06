@@ -40,10 +40,23 @@ jobs:
         with:
           ref: ${{steps.getcommit.outputs.sha}} 
         
-      - name: Cypress run
+      - name: Cypress tests
         uses: cypress-io/github-action@v2
+        # let's give this action an ID so we can refer
+        # to its output values later
+        id: cypress
+        # Continue the build in case of an error, as we need to set the
+        # commit status in the next step, both in case of success and failure
+        continue-on-error: true
         with:
-          start: npm start
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.RECORDING_KEY }}
+          
+      - name: Print Dashboard URL
+        run: |
+          echo Cypress finished with: ${{ steps.cypress.outcome }}
+          echo See results at ${{ steps.cypress.outputs.dashboardUrl }}
       
       - name: Check the test run
         if: |
