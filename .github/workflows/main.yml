@@ -1,9 +1,19 @@
 name: With server
-on: [push]
+on: 
+  issue_comment:
+    types: [created]
 jobs:
   cypress-run:
+    if: contains(github.event.comment.html_url, '/pull/') && startsWith(github.event.comment.body, '/run-e2e')
     runs-on: ubuntu-20.04
     steps:
+      - name: Notification for e2e Start
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          comment-id: "${{ github.event.comment.id }}"
+          body: |
+            ****
+            **Test Status:** The e2e test has been started please wait for the results ...      
       - name: Checkout
         uses: actions/checkout@v1
       - name: Cypress run
