@@ -51,9 +51,6 @@ describe("Testing the E2E for login and Messaging",()=>{
         cy.get('.button').click();
     })
 
-    it("Check if Username is shown in active users",()=>{
-        cy.get('.activeItem').should('have.text','jonsy');
-    })
     it("Check if we are on chatbox page after clicking on button",()=>{
         cy.url().should('include','/chat');
     })
