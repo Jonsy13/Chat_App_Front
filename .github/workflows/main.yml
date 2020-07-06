@@ -50,6 +50,7 @@ jobs:
         continue-on-error: true
         with:
           record: true
+          run: npm start 
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.RECORDING_KEY }}
           
